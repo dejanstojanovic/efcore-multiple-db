@@ -20,9 +20,7 @@ namespace MulitpleDb.Sample.Data
         public void OnNext(DiagnosticListener value)
         {
             if (value.Name == DbLoggerCategory.Name)
-            {
                 value.Subscribe(_commandInterceptor);
-            }
         }
     }
 }

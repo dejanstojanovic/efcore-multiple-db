@@ -24,7 +24,5 @@ namespace MulitpleDb.Sample.Data
         }
 
         public DbSet<Planet> Planets { get; set; }
-
-
     }
 }
