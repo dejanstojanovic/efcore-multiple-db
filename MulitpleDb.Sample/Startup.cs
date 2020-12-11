@@ -13,6 +13,7 @@ using Newtonsoft.Json.Converters;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using MulitpleDb.Sample.Validators;
+using MulitpleDb.Sample.Models;
 
 namespace MulitpleDb.Sample
 {
@@ -40,7 +41,7 @@ namespace MulitpleDb.Sample
                 options.SerializerSettings.Converters.Add(new StringEnumConverter());
             }).AddFluentValidation();
 
-            services.AddTransient<IValidator<string>, PlanetValidator>();
+            services.AddTransient<IValidator<RocketQueryModel>, RocketQueryModelValidator>();
             
 
             services.AddSwaggerGen(c =>
