@@ -36,13 +36,14 @@ namespace MulitpleDb.Sample
 
             DiagnosticListener.AllListeners.Subscribe(new GlobalListener());
 
-            services.AddControllers().AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.Converters.Add(new StringEnumConverter());
-            }).AddFluentValidation();
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                    {
+                        options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                    })
+                .AddFluentValidation();
 
             services.AddTransient<IValidator<RocketQueryModel>, RocketQueryModelValidator>();
-            
 
             services.AddSwaggerGen(c =>
             {
