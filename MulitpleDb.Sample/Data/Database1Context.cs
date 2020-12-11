@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace MulitpleDb.Sample.Data
 {
@@ -24,5 +25,6 @@ namespace MulitpleDb.Sample.Data
         }
 
         public DbSet<Planet> Planets { get; set; }
+
     }
 }
