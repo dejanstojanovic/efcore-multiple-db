@@ -2,6 +2,9 @@
 using MulitpleDb.Sample.Models;
 using System;
 using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
+using MulitpleDb.Sample.Validators;
+using System.ComponentModel.DataAnnotations;
 
 namespace MulitpleDb.Sample.Controllers
 {
@@ -11,9 +14,9 @@ namespace MulitpleDb.Sample.Controllers
     {
         [HttpPost("{rocket}")]
         public async Task<String> Post(
-            [FromRoute] String rocket,
-            [FromQuery] FuelTypeEnum fuelType,
-            [FromQuery] String planet)
+            [FromRoute][CustomizeValidator(Interceptor = typeof(PlanetValidator), Skip = true)] String rocket,
+            [FromQuery][Required] FuelTypeEnum fuelType,
+            [FromQuery][Required] String planet)
         {
             return $"Rocket {rocket} launched to {planet} using {Enum.GetName(typeof(FuelTypeEnum), fuelType)} fuel type";
         }

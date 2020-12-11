@@ -10,6 +10,9 @@ using MulitpleDb.Sample.Swagger;
 using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using MulitpleDb.Sample.Validators;
 
 namespace MulitpleDb.Sample
 {
@@ -35,7 +38,11 @@ namespace MulitpleDb.Sample
             services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.Converters.Add(new StringEnumConverter());
-            });
+            }).AddFluentValidation();
+
+            services.AddTransient<IValidator<string>, PlanetValidator>();
+            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MulitpleDb.Sample", Version = "v1" });
