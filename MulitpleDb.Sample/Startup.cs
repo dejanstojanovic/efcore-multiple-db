@@ -40,6 +40,7 @@ namespace MulitpleDb.Sample
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MulitpleDb.Sample", Version = "v1" });
                 c.ParameterFilter<PlanetsParameterFilter>();
+
             }).AddSwaggerGenNewtonsoftSupport();
         }
 
@@ -50,7 +51,10 @@ namespace MulitpleDb.Sample
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MulitpleDb.Sample v1"));
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "MulitpleDb.Sample v1");
+                });
             }
 
             app.UseHttpsRedirection();

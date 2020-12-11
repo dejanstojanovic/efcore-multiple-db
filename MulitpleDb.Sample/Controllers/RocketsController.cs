@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MulitpleDb.Sample.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
 using System.Threading.Tasks;
 
