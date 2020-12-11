@@ -20,7 +20,7 @@ namespace MulitpleDb.Sample.Swagger
 
         public void Apply(OpenApiParameter parameter, ParameterFilterContext context)
         {
-            if (parameter.Name.Equals("planet"))
+            if (parameter.Name.Equals("planet", StringComparison.InvariantCultureIgnoreCase))
             {
 
                 using (var scope = _serviceScopeFactory.CreateScope())
