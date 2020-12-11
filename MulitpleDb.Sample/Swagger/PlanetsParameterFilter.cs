@@ -31,13 +31,7 @@ namespace MulitpleDb.Sample.Swagger
                     parameter.Schema.Enum = planets.Select(p => new OpenApiString(p.Name)).ToList<IOpenApiAny>();
 
                 }
-
-                //parameter.Schema.Enum = new List<IOpenApiAny>()
-                //        {
-                //            new OpenApiString("Item 1"),
-                //            new OpenApiString("Item 2")
-                //        };
-             }
+            }
         }
     }
 }
