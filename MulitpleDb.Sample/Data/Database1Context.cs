@@ -21,10 +21,10 @@ namespace MulitpleDb.Sample.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration<Planet>(new PlanetsConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
         }
 
         public DbSet<Planet> Planets { get; set; }
-
+        public DbSet<PlanetPair> PlanetPairs { get; set; }
     }
 }

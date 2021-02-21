@@ -11,9 +11,9 @@ namespace MulitpleDb.Sample
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            await CreateHostBuilder(args).Build().RunAsync();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

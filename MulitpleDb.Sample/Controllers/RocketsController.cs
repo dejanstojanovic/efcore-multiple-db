@@ -14,7 +14,9 @@ namespace MulitpleDb.Sample.Controllers
             [FromRoute]String rocket,
             [FromQuery]RocketQueryModel query)
         {
-            return $"Rocket {rocket} launched to {query.Planet} using {Enum.GetName(typeof(FuelTypeEnum), query.FuelType)} fuel type";
+            return await Task<String>.FromResult(
+                $"Rocket {rocket} launched to {query.Planet} using {Enum.GetName(typeof(FuelTypeEnum), query.FuelType)} fuel type"
+                );
         }
     }
 }
