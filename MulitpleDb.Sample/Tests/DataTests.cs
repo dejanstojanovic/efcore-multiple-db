@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
 using MulitpleDb.Sample.Data;
@@ -15,11 +16,15 @@ namespace MulitpleDb.Sample.Tests
         public async Task PlanetPairs_Should_Return_Pairs()
         {
             //Arrange
+            var environment = new Mock<IHostingEnvironment>();
+            environment.Setup(e => e.EnvironmentName).Returns("XUnit");
+
             var loggerFactory = new Mock<ILoggerFactory>();
             var options = new DbContextOptionsBuilder<Database1Context>()
                  .UseInMemoryDatabase("InMemoryDb")
                  .Options;
-            var _dbContext = new Database1Context(options,loggerFactory.Object);
+            var _dbContext = new Database1Context(options, loggerFactory.Object, environment.Object);
+
             await _dbContext.PlanetPairs.AddRangeAsync(
                 new PlanetPair() { Id = 1, Name = "Earth", Pair = "Earth - Mars" },
                 new PlanetPair() { Id = 2, Name = "Saturn", Pair = "Saturn - Neptune" },
