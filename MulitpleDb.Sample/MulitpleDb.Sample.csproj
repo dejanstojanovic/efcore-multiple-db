@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-	<PropertyGroup name="Assembly">
+	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<Version>5.0.103</Version>
 	</PropertyGroup>
