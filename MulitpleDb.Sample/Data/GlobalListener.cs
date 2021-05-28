@@ -6,7 +6,7 @@ namespace MulitpleDb.Sample.Data
 {
     public class GlobalListener : IObserver<DiagnosticListener>
     {
-        private readonly CommandInterceptor _commandInterceptor = new CommandInterceptor();
+        private readonly GlobalCommandInterceptor _commandInterceptor = new GlobalCommandInterceptor();
         public void OnCompleted()
         {
             
