@@ -1,11 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 
 namespace MulitpleDb.Sample.Data
 {
-    public class CommandInterceptor : IObserver<KeyValuePair<string, object>>
+    public class GlobalCommandInterceptor : IObserver<KeyValuePair<string, object>>
     {
+        readonly IConfiguration _configuration;
+        public GlobalCommandInterceptor(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public void OnCompleted()
         {
             
