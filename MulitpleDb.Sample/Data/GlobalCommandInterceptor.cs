@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MulitpleDb.Sample.Data
 {
-    public class CommandInterceptor : IObserver<KeyValuePair<string, object>>
+    public class GlobalCommandInterceptor : IObserver<KeyValuePair<string, object>>
     {
         public void OnCompleted()
         {
