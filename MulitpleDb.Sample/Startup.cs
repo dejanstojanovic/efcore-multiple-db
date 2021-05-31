@@ -29,16 +29,14 @@ namespace MulitpleDb.Sample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<GlobalListener>();
-            services.AddTransient<GlobalCommandInterceptor>();
+            services.AddScoped<GlobalListener>();
+            services.AddScoped<GlobalCommandInterceptor>();
 
             services.AddDbContext<Database1Context>((provider,options) =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Database1"));
                 DiagnosticListener.AllListeners.Subscribe(provider.GetRequiredService<GlobalListener>());
             });
-
-            //DiagnosticListener.AllListeners.Subscribe(new GlobalListener());
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>

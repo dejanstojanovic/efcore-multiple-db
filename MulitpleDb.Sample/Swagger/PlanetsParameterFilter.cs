@@ -22,14 +22,11 @@ namespace MulitpleDb.Sample.Swagger
         {
             if (parameter.Name.Equals("planet", StringComparison.InvariantCultureIgnoreCase))
             {
-
                 using (var scope = _serviceScopeFactory.CreateScope())
                 {
                     var planetsContext = scope.ServiceProvider.GetRequiredService<Database1Context>();
-                    IEnumerable<Planet> planets = planetsContext.Planets.ToArray();
-
-                    parameter.Schema.Enum = planets.Select(p => new OpenApiString(p.Name)).ToList<IOpenApiAny>();
-
+                    IEnumerable<String> planets = planetsContext.Planets.Select(p => p.Name).ToArray();
+                    parameter.Schema.Enum = planets.Select(p => new OpenApiString(p)).ToList<IOpenApiAny>();
                 }
             }
         }
