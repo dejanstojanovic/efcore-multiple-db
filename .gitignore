@@ -388,4 +388,4 @@ FodyWeavers.xsd
 *.sln.iml
 
 # Local Launch settings 
-launchSettings.json
+**/launchSettings.json
