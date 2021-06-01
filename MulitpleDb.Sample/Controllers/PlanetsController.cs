@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dapper;
 
 namespace MulitpleDb.Sample.Controllers
 {
@@ -13,7 +14,7 @@ namespace MulitpleDb.Sample.Controllers
     [Route("[controller]")]
     public class PlanetsController : ControllerBase
     {
-        
+
         readonly ILogger<PlanetsController> _logger;
         readonly Database1Context _database1Context;
         public PlanetsController(
@@ -27,7 +28,7 @@ namespace MulitpleDb.Sample.Controllers
         [HttpGet]
         public async Task<IEnumerable<String>> Get()
         {
-            return await _database1Context.Planets.AsNoTracking().Select(p=>p.Name).ToArrayAsync();
+            return await _database1Context.Planets.AsNoTracking().Select(p => p.Name).ToArrayAsync();
         }
     }
 }

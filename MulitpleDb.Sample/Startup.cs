@@ -14,27 +14,40 @@ using FluentValidation.AspNetCore;
 using FluentValidation;
 using MulitpleDb.Sample.Validators;
 using MulitpleDb.Sample.Models;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace MulitpleDb.Sample
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IWebHostEnvironment HostingEnvironment { get; }
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
-        }
+            HostingEnvironment = environment;
 
-        public IConfiguration Configuration { get; }
+            Log.Logger = new LoggerConfiguration()
+                 .Enrich.FromLogContext()
+                 .ReadFrom.Configuration(configuration)
+                 .CreateLogger();
+        }
+        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Database1Context>(options =>
+            services.AddLogging(c => c.AddSerilog());
+            services.AddScoped<GlobalListener>();
+            services.AddScoped<GlobalCommandInterceptor>();
+
+            services.AddDbContext<Database1Context>((provider, options) =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Database1"));
+                DiagnosticListener.AllListeners.Subscribe(provider.GetRequiredService<GlobalListener>());
             });
-
-            DiagnosticListener.AllListeners.Subscribe(new GlobalListener());
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
