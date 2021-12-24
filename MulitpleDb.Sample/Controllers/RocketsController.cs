@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MulitpleDb.Sample.Constants;
 using MulitpleDb.Sample.Models;
 using System;
 using System.Threading.Tasks;
 
 namespace MulitpleDb.Sample.Controllers
 {
+    [Authorize(AuthenticationSchemes = AuthenticationSchemaNames.MixSchemaNames)]
     [Route("api/[controller]")]
     [ApiController]
     public class RocketsController : ControllerBase

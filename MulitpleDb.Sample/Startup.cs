@@ -16,6 +16,9 @@ using MulitpleDb.Sample.Validators;
 using MulitpleDb.Sample.Models;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using MulitpleDb.Sample.Extensions;
+using MulitpleDb.Sample.Constants;
+using MulitpleDb.Sample.Options;
 
 namespace MulitpleDb.Sample
 {
@@ -34,7 +37,7 @@ namespace MulitpleDb.Sample
                  .ReadFrom.Configuration(configuration)
                  .CreateLogger();
         }
-        
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -63,7 +66,20 @@ namespace MulitpleDb.Sample
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MulitpleDb.Sample", Version = "v1" });
                 c.ParameterFilter<PlanetsParameterFilter>();
 
+                c.AddApiKeyAuthSchemaSecurityDefinitions().AddBasicAuthSchemaSecurityDefinitions();
+
             }).AddSwaggerGenNewtonsoftSupport();
+
+
+            services.Configure<AuthenticationConfig>(Configuration.GetSection(nameof(AuthenticationConfig)));
+            services.AddAuthentication(o =>
+            {
+                o.DefaultAuthenticateScheme = AuthenticationSchemaNames.ApiKeyAuthentication;
+            })
+            .AddApiKeyAuthenticationSchema()
+            .AddBasicAuthenticationSchema();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
