@@ -1,12 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using MulitpleDb.Sample.Constants;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace MulitpleDb.Sample.Extensions
 {
     public static class SwaggerExtensions
     {
-        public static void AddBasicAuthSchemaSecurityDefinitions(this SwaggerGenOptions options)
+        public static SwaggerGenOptions AddBasicAuthSchemaSecurityDefinitions(this SwaggerGenOptions options)
         {
             options.AddSecurityDefinition("basic", new OpenApiSecurityScheme
             {
@@ -31,13 +32,15 @@ namespace MulitpleDb.Sample.Extensions
                             new string[] {}
                     }
                 });
+
+            return options;
         }
 
-        public static void AddApiKeyAuthSchemaSecurityDefinitions(this SwaggerGenOptions options)
+        public static SwaggerGenOptions AddApiKeyAuthSchemaSecurityDefinitions(this SwaggerGenOptions options)
         {
             options.AddSecurityDefinition("token", new OpenApiSecurityScheme
             {
-                Name = "X-API-KEY",
+                Name = HeaderKeyNames.ApiKeyAuthenticationKey,
                 Type = SecuritySchemeType.ApiKey,
                 In = ParameterLocation.Header,
                 Description = "Api key from header",
@@ -58,6 +61,7 @@ namespace MulitpleDb.Sample.Extensions
                         }
                     });
 
+            return options;
         }
     }
 }
