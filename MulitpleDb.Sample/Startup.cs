@@ -66,7 +66,7 @@ namespace MulitpleDb.Sample
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MulitpleDb.Sample", Version = "v1" });
                 c.ParameterFilter<PlanetsParameterFilter>();
 
-                c.AddApiKeyAuthSchemaSecurityDefinitions().AddBasicAuthSchemaSecurityDefinitions();
+                c.AddApiKeyAuthSchemaSecurityDefinitions();//.AddBasicAuthSchemaSecurityDefinitions();
 
             }).AddSwaggerGenNewtonsoftSupport();
 

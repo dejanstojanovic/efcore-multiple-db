@@ -47,18 +47,20 @@ namespace MulitpleDb.Sample.Extensions
                 Description = "Api key from header",
                 Flows = new OpenApiOAuthFlows
                 {
-                    //Password = new OpenApiOAuthFlow
-                    //{
-                    //    AuthorizationUrl = new Uri($"{Configuration.GetValue<string>("Authentication:Authority")}/connect/authorize"),
-                    //    Scopes = new Dictionary<string, string> { { "stack-api", "Stack Api access" } },
-                    //    TokenUrl = new Uri($"{Configuration.GetValue<string>("Authentication:Authority")}/connect/token"),
-                    //}
-
-                    ClientCredentials = new OpenApiOAuthFlow
+                    Password = new OpenApiOAuthFlow
                     {
                         AuthorizationUrl = new Uri($"http://localhost:5000/api/authorize"),
                         TokenUrl = new Uri($"http://localhost:5000/api/authorize/token")
+                        //AuthorizationUrl = new Uri($"{Configuration.GetValue<string>("Authentication:Authority")}/connect/authorize"),
+                        //Scopes = new Dictionary<string, string> { { "stack-api", "Stack Api access" } },
+                        //TokenUrl = new Uri($"{Configuration.GetValue<string>("Authentication:Authority")}/connect/token"),
                     }
+
+                    //ClientCredentials = new OpenApiOAuthFlow
+                    //{
+                    //    AuthorizationUrl = new Uri($"http://localhost:5000/api/authorize"),
+                    //    TokenUrl = new Uri($"http://localhost:5000/api/authorize/token")
+                    //}
                 }
             });
 
