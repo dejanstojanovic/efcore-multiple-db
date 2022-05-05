@@ -19,6 +19,7 @@ using Serilog;
 using MulitpleDb.Sample.Extensions;
 using MulitpleDb.Sample.Constants;
 using MulitpleDb.Sample.Options;
+using MulitpleDb.Sample.Middlewares;
 
 namespace MulitpleDb.Sample
 {
@@ -79,7 +80,10 @@ namespace MulitpleDb.Sample
             .AddApiKeyAuthenticationSchema()
             .AddBasicAuthenticationSchema();
 
-
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Authenticated", policy => policy.RequireAuthenticatedUser());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,6 +98,10 @@ namespace MulitpleDb.Sample
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "MulitpleDb.Sample v1");
                 });
             }
+
+
+            app.RestricteStaticContent("/tent.jpg");
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
