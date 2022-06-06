@@ -72,8 +72,8 @@ if($vulnerabilityDetected){
     Set-Content -Path $summaryPath -Value $summary
 
     # Push to Azure DevOps
-    #$summaryOut = "##vso[task.uploadsummary]" + $summaryPath
-    #Write-Host $summaryOut
+    $summaryOut = "##vso[task.uploadsummary]" + $summaryPath
+    Write-Host $summaryOut
 
     throw "Vulnerability detected!"
 }
